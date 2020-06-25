@@ -55,6 +55,7 @@ with open(csvpath) as csvfile:
 
         net_total_amount = net_total_amount + int(row[1])
 
+# type(net_total_amount)
     # --------------------------------------
     # FIND AVERAGE AMOUNT OR PROFIT / LOSSES
     # --------------------------------------
@@ -67,45 +68,49 @@ with open(csvpath) as csvfile:
         monthly_difference = int(monthly_profit_losses[i]) - int(monthly_profit_losses[i-1])
         profit_loss_sum += monthly_difference
     average_amount = profit_loss_sum / (len(monthly_profit_losses)-1)
-    
+    average_amount = '{0:.2f}'.format(average_amount)
+
     # Print Summary
     print(f"MONTHLY AVERAGE: {average_amount}")
     print("Financial Analysis")
     print("-----------------------------")    
     print(f"Total Months {count_months}")
     print(f"Total:  ${net_total_amount}")
-    print(f"Average Change:  {'{0:.2f}'.format(average_amount)}")
+    print(f"Average Change:  {average_amount}")
     print(f"Greatest Increase in Profits: {monthly_max_date} ({monthly_max_amount})")
     print(f"Greatest Decrease in Profits: {monthly_min_date} ({monthly_min_amount})")
 
 
 # Specify the file to write to
-output_path = os.path.join("analysis", "PyBank Summary.csv")
+output_path = os.path.join("analysis", "Financial Summary.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
-with open(output_path, 'w') as csvfile:
+#with open(output_path, 'w') as csvfile:
 
     # Initialize csv.writer
-    csvwriter = csv.writer(csvfile, delimiter=',')
+ #   csvwriter = csv.writer(csvfile, delimiter=',')
+
+# writing to a txt file sourced from https://www.w3schools.com/python/python_file_write.asp
+with open(output_path, 'w') as txtfile:
 
     # Write the first row (column headers)
-    csvwriter.writerow(["Financial Analysis"])
+    txtfile.write("Financial Analysis\n")
 
     # Write the second row
-    csvwriter.writerow(["-----------------------------"])
+    txtfile.write("-----------------------------\n")
 
     # Write the third row
-    csvwriter.writerow([f"Total Months {count_months}"])
+    txtfile.write(f"Total Months: {count_months}\n")
 
+    # print(type(net_total_amount))
     # Write the fourth row
-    csvwriter.writerow([f"Total:  ${net_total_amount}"])
+    txtfile.write(f"Total:  ${net_total_amount}\n")
 
     # Write the fifth row
-    # DEBUG: commented out temporarily
-    #csvwriter.writerow([f"Average Change:  {'{0:.2f}'.format(average_amount)}"])
+    txtfile.write(f"Average Change:  {format(average_amount)}\n")
 
     # Write the sixth row
-    csvwriter.writerow([f"Greatest Increase in Profits: {monthly_max_date} ({monthly_max_amount})"])
+    txtfile.write(f"Greatest Increase in Profits: {monthly_max_date} ({monthly_max_amount})\n")
 
     # Write the seventh row
-    csvwriter.writerow([f"Greatest Decrease in Profits: {monthly_min_date} ({monthly_min_amount})"])
+    txtfile.write(f"Greatest Decrease in Profits: {monthly_min_date} ({monthly_min_amount})\n")

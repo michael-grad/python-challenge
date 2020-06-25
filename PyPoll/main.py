@@ -107,29 +107,26 @@ with open(csvpath) as csvfile:
     print("-------------------------")
 
     # Specify the file to write to
-output_path = os.path.join("analysis", "PyPoll Summary.csv")
+output_path = os.path.join("analysis", "Election Summary.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
-with open(output_path, 'w') as csvfile:
-
-    # Initialize csv.writer
-    csvwriter = csv.writer(csvfile, delimiter=',')
+with open(output_path, 'w') as txtfile:
 
     # Write the first row (column headers)
-    csvwriter.writerow(["Election Results"])
+    txtfile.write("Election Results\n")
 
     # Write the second row
-    csvwriter.writerow(["-----------------------------"])
+    txtfile.write("-----------------------------\n")
 
     # Write candidate, candidate percent, and (candidate total)
     for candidate in candidate_list:
-        csvwriter.writerow([f"{candidate}:  {candidate_percents[candidate]} ({candidate_totals[candidate]})"])
+        txtfile.write(f"{candidate}:  {candidate_percents[candidate]} ({candidate_totals[candidate]})\n")
 
     # Write the eighth row
-    csvwriter.writerow(["-----------------------------"])
+    txtfile.write("-----------------------------\n")
 
     # Write the nineth row
-    csvwriter.writerow([f"Winner:  {winner}"])
+    txtfile.write(f"Winner:  {winner}\n")
 
     # Write the tenth row
-    csvwriter.writerow(["-----------------------------"])
+    txtfile.write("-----------------------------\n")
