@@ -1,40 +1,33 @@
-# First we'll import the os module
-# This will allow us to create file paths across operating systems
-# gaol: read each line into a list
+# Import os module for understanding file path structures
 import os
 
-# Module for reading CSV files
+# import module for reading CSV files
 import csv
 
 csvpath = os.path.join('Resources', 'election_data.csv')
 
 
 # Reading using CSV module
-print("opening", csvpath)
+# print("opening", csvpath)
+
 with open(csvpath) as csvfile:
-    print(csvfile)
-    # CSV reader specifies delimiter and variable that holds contents
+    # print(csvfile)
+
+    # CSV reader specifies delimiter and file object
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    print(csvreader)
+    # print(csvreader)
 
-    # Read the header row first (skip this step if there is now header)
+    # Read the header row first
     # next pops off the first line off
     csv_header = next(csvreader)
-    print("csv_header is a ", type(csv_header))
-    print(f"CSV Header: {csv_header}")
+
+    # print("csv_header is a ", type(csv_header))
+    # print(f"CSV Header: {csv_header}")
     
     # Read each row of data after the header
     total_votes = 0
     candidate_list = []
-    # khan_count = 0
-    # khan_percent = 0
-    # correy_count = 0
-    # correy_percent = 0
-    # li_count = 0
-    # li_percent = 0
-    # o_tooley_count = 0
-    # o_tooley_percent = 0
     
     candidate_totals = {}
     for row in csvreader:
@@ -53,9 +46,6 @@ with open(csvpath) as csvfile:
 
     # print(candidate_totals)
     # winner = "khan"
-
-    # khan_count = candidate_totals.get("Kahn")
-    # print(khan_count)
 
     # --------------------------------------------
     # CREATE A DICTIONARY OF CANDIDATE PERCENTAGES
@@ -80,7 +70,7 @@ with open(csvpath) as csvfile:
         
 
     # --------------------------------------------
-    # IDENTIFY THE WINNER BY COMPARING PERCENTAGES
+    # IDENTIFY THE WINNER BY SORTING CANDIDATE_TOTALS
     # --------------------------------------------
 
     # Looping through a dictionary by an index sourced from https://stackoverflow.com/questions/17793364/python-iterate-dictionary-by-index
@@ -95,11 +85,6 @@ with open(csvpath) as csvfile:
     # print("Sorted",sorted_candidate_percents)
     # print('Winner : ',winner)
     
-    # percent formatting code source from https://www.w3resource.com/python-exercises/string/python-data-type-string-exercise-36.php
-    # khan_percent = '{0:.3%}'.format(khan_count / total_votes)
-    # correy_percent = '{0:.3%}'.format(correy_count / total_votes)
-    # li_percent = '{0:.3%}'.format(li_count / total_votes)
-    # o_tooley_percent = '{0:.3%}'.format(o_tooley_count / total_votes)
 
     # ----------------------
     # # PRINT ELECTION RESULTS
@@ -113,9 +98,7 @@ with open(csvpath) as csvfile:
     candidate_stats = [sorted_candidate_percents,sorted_candidate_totals]
     candidate_list = list(candidate_totals)
     # print(candidate_list)
-    # Printing key of candidate_totals sourced from https://www.w3resource.com/python-exercises/list/python-data-type-list-exercise-65.php
-    # Printing values from dictionary sourced from 
-    # NOT WORKING - How to get retrieve values from a dictionary by using the index
+
     for candidate in candidate_list:
         print(f"{candidate}:  {candidate_percents[candidate]} ({candidate_totals[candidate]})")
             
